@@ -33,12 +33,15 @@ def bg(ax):
  ax.grid(color='#e4e9e9',lw=.6);ax.set_xlabel('Longitude (°)');ax.set_ylabel('Latitude (°)')
  ax.spines['left'].set_linewidth(.9);ax.spines['bottom'].set_linewidth(.9)
  ax.tick_params(direction='out',length=4,width=.8)
-def key_style():
- return dict(loc='lower left',bbox_to_anchor=(.02,.015),fontsize=12,title_fontsize=12,
-             frameon=True,facecolor='white',edgecolor='#d4dadb',framealpha=.97,
-             borderpad=.45,handletextpad=.6,labelspacing=.6)
-
-fig,axs=plt.subplots(3,2,figsize=(13.2,17),layout='constrained')
+fig=plt.figure(figsize=(13.2,19.5),layout='constrained')
+outer=fig.add_gridspec(3,2,wspace=.12,hspace=.14)
+axs=np.empty((3,2),dtype=object)
+keys=np.empty((3,2),dtype=object)
+for row in range(3):
+ for col in range(2):
+  cell=outer[row,col].subgridspec(2,1,height_ratios=[7,1.0],hspace=.02)
+  axs[row,col]=fig.add_subplot(cell[0])
+  keys[row,col]=fig.add_subplot(cell[1]);keys[row,col].axis('off')
 for row,(species,color) in enumerate([('Arabica',A),('Canephora',C)]):
  subset=D.loc[D.species==species]
  for j,period in enumerate(['2012–2015','2021–2024']):
@@ -49,8 +52,9 @@ for row,(species,color) in enumerate([('Arabica',A),('Canephora',C)]):
   values=[.001,.005,.02] if species=='Arabica' else [.001,.01,.04]
   labels=['0.1%','0.5%','2%'] if species=='Arabica' else ['0.1%','1%','4%']
   handles=[key(color,v,s_share,lab) for v,lab in zip(values,labels)]
-  ax.legend(handles=handles,title='National area share',ncol=1,
-            columnspacing=.6,**key_style())
+  keys[row,j].legend(handles=handles,title='National area share',ncol=3,
+            loc='center',fontsize=12,title_fontsize=12,frameon=False,
+            handletextpad=.5,columnspacing=1.4)
  # Missing period shares are not recoded to zero; only measured pairs enter change maps.
  wide=subset.pivot(index='municipality_code',columns='period',values='share').dropna()
  coords=subset[['municipality_code','lon','lat']].drop_duplicates('municipality_code')
@@ -62,13 +66,16 @@ for row,(species,color) in enumerate([('Arabica',A),('Canephora',C)]):
  ax.set_title(f"{'ef'[row]}  {species} · area-share change",loc='left',fontweight='bold',pad=14)
  color_handles=[Line2D([0],[0],ls='none',marker='o',ms=6,mfc=LOSS,mec=LOSS,label='Loss'),
                 Line2D([0],[0],ls='none',marker='o',ms=6,mfc=GAIN,mec=GAIN,label='Gain')]
- leg=ax.legend(handles=color_handles,title='Share change',ncol=1,
-               columnspacing=1.3,loc='lower left',bbox_to_anchor=(.02,.28),fontsize=12,
-               title_fontsize=12,frameon=True,facecolor='white',edgecolor='#d4dadb',framealpha=.97)
- ax.add_artist(leg)
+ lax=keys[2,row]
+ leg=lax.legend(handles=color_handles,title='Direction',ncol=2,
+               loc='center left',bbox_to_anchor=(0,.50),fontsize=12,
+               title_fontsize=12,frameon=False,columnspacing=.65,handletextpad=.35)
+ lax.add_artist(leg)
  values=[.05,.2,.5] if species=='Arabica' else [.05,.5,1.0]
  size_handles=[key(DARK,v,s_change,f'{v:g} pp',filled=False) for v in values]
- ax.legend(handles=size_handles,title='Absolute change (pp)',ncol=1,columnspacing=.6,**key_style())
+ lax.legend(handles=size_handles,title='Absolute change (pp)',ncol=3,
+            loc='center right',bbox_to_anchor=(1,.50),fontsize=12,
+            title_fontsize=12,frameon=False,columnspacing=.55,handletextpad=.3)
 for ext in ('png','pdf'):
  fig.savefig(BASE/f'Figure2_geographic_reorganization_coauthor_final.{ext}',
              dpi=360 if ext=='png' else None,bbox_inches='tight',pad_inches=.18)
