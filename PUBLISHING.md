@@ -1,16 +1,22 @@
-# Publish this repository on GitHub
+# Private repository and eventual public release
 
-Keep the repository **private** during coauthor review. The archive includes code, annual municipal climate indices and the audited coffee production series in compressed form, compact figure inputs and figure files. Original daily NASA POWER downloads and raster/model intermediates are not bundled.
+This working repository is private at
+`https://github.com/rogeriosouzanoia/brazilian-coffee-adjustment-pathways`.
+It contains selected research code, complete audited municipal coffee statistics,
+derived municipal annual climate indices, inputs for the submitted figures,
+independent audit scripts and figure exports. It does not contain the original
+daily NASA POWER downloads, raster tiles or serialized model objects.
 
-From a computer with Git and the GitHub CLI (`gh`) installed and authenticated:
+During coauthor review, keep the repository private. Before a public release:
 
-```bash
-unzip Brazilian_coffee_reproducibility_verified.zip
-cd brazilian-coffee-study-repro
-git init
-git add .
-git commit -m "Archive Brazilian coffee manuscript code and figure inputs"
-gh repo create brazilian-coffee-adjustment-pathways --private --source=. --remote=origin --push
-```
+1. Run the full selected R workflow with recorded R package versions and frozen
+   source extracts, and resolve any discrepancies in the remaining water,
+   raster and productivity outputs.
+2. Have all authors approve the code, data redistribution, repository license,
+   authorship and data/code availability statements.
+3. Tag a reviewed release and archive that exact version with a persistent DOI.
+   Insert the DOI and public URL into the manuscript before submission.
 
-If `gh repo create` reports that the name is taken, choose another name. Verify the GitHub account and the private visibility before publishing. Review authorship, the data availability statement, licensing and a persistent archive DOI before switching to public visibility. Do not add `.Renviron`, `.env`, API keys, unreviewed raw downloads, model caches or restricted files. A private GitHub repository by itself is not the public code/data deposit described in the manuscript.
+A private GitHub URL alone does not satisfy the manuscript's proposed public
+code/data deposit. Keep `.Renviron`, `.env`, credentials, unreviewed downloads,
+model caches and restricted files out of the public release.
