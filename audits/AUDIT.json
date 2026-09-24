@@ -1,0 +1,15 @@
+{
+  "status": "PASS: independent fixed-area weighting for four meteorological indicators",
+  "annual_rows": 82544,
+  "municipalities": 1876,
+  "species_metric_year_comparisons": 352,
+  "maximum_annual_absolute_difference": 6.59383658785373e-12,
+  "maximum_period_absolute_difference": 1.1359801987964602e-12,
+  "limits": "Daily climate-source calculations, water balance and full upstream R pipeline not tested",
+  "input_sha256": {
+    "coffee_power_brazil_municipality_annual_indices.csv.gz": "5fb5a738b6b6a10bc96f1d79dbf6c5ef68feb55038c3d8a93fd39d15bf8b52ac",
+    "coffee_brazil_municipality_audited_1974_2024.csv.gz": "f32e1aac75af12e96576f13127e3f6223bf995c81f06a79726a721476cbc20f8",
+    "figure03_annual_anomaly_plot_data.csv": "f24ef9641f48fbfed39aaf4ac5793d479ea7235f6737bd8f572a5f6ac1384d25",
+    "figure03_selected_period_changes.csv": "2526bcf9abc466873bde1f74b429a70657575aeb822f3968619c5e5b4b0e4a25"
+  }
+}

@@ -1,0 +1,15 @@
+.Rhistory
+.RData
+.Rproj.user/
+__pycache__/
+*.pyc
+.DS_Store
+.Renviron
+.env
+04_outputs/
+03_data/
+raw/
+cache/
+*.rds
+*.tif
+*.tiff

@@ -1,0 +1,7 @@
+PUBLISHED_COLUMNS ['species', 'area', 'redistribution', 'within_municipality_productivity', 'entry', 'exit', 'observed_change']
+  species   baseline_t   recent_t  observed_change_pct    residual_t  harvested_area_level_pct  geographic_redistribution_pct  within_municipality_productivity_pct  entry_pct  exit_pct  continuing  entrants  exits
+  Arabica 2.151764e+06 2202281.50             2.347741 -1.455192e-10                 -5.120402                       4.174527                              3.672173   0.088962 -0.467520        1157        77    383
+Canephora 7.116490e+05 1021640.75            43.559641 -5.820766e-11                -21.574412                       2.392130                             62.659123   0.376414 -0.293614         279        75     87
+  species   area  redistribution  within_municipality_productivity  entry  exit  observed_change
+  Arabica  -5.12            4.17                              3.67   0.09 -0.47             2.35
+Canephora -21.57            2.39                             62.66   0.38 -0.29            43.56
